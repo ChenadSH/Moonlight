@@ -100,7 +100,8 @@ const filterDevice = (devices, name) => {
   var self = this, list = [];
   for (var i = 0; i < devices.length; i++) {
     var device = devices[i];
-    if (device[name].indexOf("Moonlight") !== -1) {
+    // if (device[name].indexOf("Moonlight") !== -1) {
+    if (device[name].indexOf("BLUFI_DEVICE") !== -1) {
       list.push(device);
     }
   }

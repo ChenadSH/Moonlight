@@ -50,16 +50,20 @@ Page({
       uuid: "",
     });
     self.setProcess(0, util.descSucList[0]);
+    wx.closeBLEConnection({
+        deviceId: self.data.deviceId
+    });
     wx.createBLEConnection({
       // 这里的 deviceId 需要已经通过 createBLEConnection 与对应设备建立链接 
       deviceId: self.data.deviceId,
       timeout: 10000,
       success: function (res) {
-        wx.setBLEMTU({
-          deviceId: self.data.deviceId,
-          mtu:128
-         })
-        console.log(self.data.deviceId)
+//         wx.setBLEMTU({
+//           deviceId: self.data.deviceId,
+//           mtu:128
+//          })
+        console.log(res)
+        wx.stopBluetoothDevicesDiscovery();
         self.getDeviceServices(self.data.deviceId);
       },
       fail: function (res) {
@@ -79,6 +83,7 @@ Page({
   },
   getDeviceServices: function (deviceId) {
     var self = this;
+    console.log("deviceID:"+deviceId)
     wx.getBLEDeviceServices({
       // 这里的 deviceId 需要已经通过 createBLEConnection 与对应设备建立链接 
       deviceId: deviceId,
@@ -96,6 +101,7 @@ Page({
         }
       },
       fail: function (res) {
+        console.log("err",res)
         self.setFailProcess(true, util.descFailList[1]);
       }
     })

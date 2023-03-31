@@ -22,11 +22,12 @@ Page({
   getBluDevice: function () {
     var self = this;
     wx.startBluetoothDevicesDiscovery({
+      allowDuplicatesKey: true,
       success: function (res) {
         wx.onBluetoothDeviceFound(function (res) {
           var list = util.filterDevice(res.devices, "name");
-          console.log(list);
           if (list.length > 0) {
+            console.log(list)
             var deviceList = self.data.deviceList;
             wx.hideLoading();
             list.forEach(function(item) {

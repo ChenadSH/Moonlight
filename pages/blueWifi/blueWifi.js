@@ -70,6 +70,29 @@ Page({
       deviceId: options.deviceId
     })
     this.getWifiInfo();
+    // 连接蓝牙
+    wx.closeBLEConnection({
+      deviceId: this.data.deviceId
+    });
+    wx.createBLEConnection({
+      // 这里的 deviceId 需要已经通过 createBLEConnection 与对应设备建立链接 
+      deviceId: options.deviceId,
+      timeout: 10000,
+      success: function (res) {
+        wx.stopBluetoothDevicesDiscovery();
+        wx.getBLEDeviceServices({
+          // 这里的 deviceId 需要已经通过 createBLEConnection 与对应设备建立链接 
+          deviceId: options.deviceId,
+          success: function (res) {
+            console.log(res)
+          },
+          fail: function (res) {
+            console.log("err:",res)
+          }
+        })
+      }
+    })
+      
   },
 
   /**
