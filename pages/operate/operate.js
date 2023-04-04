@@ -92,13 +92,20 @@ Page({
   // udp广播发送数据
   postData: function (data) {
     var timeout = 0
+    console.log('udp',data)
     for (let i = 0; i < 3; i++) {
       setTimeout(() => {
         udp.send({
-          address: '255.255.255.255', //广播地址
+          address: '192.168.3.176', //广播地址
           port: 3333, //小夜灯端口号
           message: JSON.stringify(data)
         })
+        // udp.send({
+        //   address: '255.255.255.0', //广播地址
+        //   port: 3333, //小夜灯端口号
+        //   message: JSON.stringify(data)
+        // })
+        
       }, timeout)
       timeout += 200;
     }

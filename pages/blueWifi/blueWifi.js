@@ -70,7 +70,7 @@ Page({
       deviceId: options.deviceId
     })
     this.getWifiInfo();
-    // 连接蓝牙
+    // 连接蓝牙 -- bycx
     wx.closeBLEConnection({
       deviceId: this.data.deviceId
     });
@@ -85,6 +85,9 @@ Page({
           deviceId: options.deviceId,
           success: function (res) {
             console.log(res)
+            // wx.navigateTo({
+            //   url: '/pages/operate/operate',
+            // })
           },
           fail: function (res) {
             console.log("err:",res)
